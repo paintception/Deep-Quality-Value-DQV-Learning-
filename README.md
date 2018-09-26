@@ -20,6 +20,8 @@ and
 
 ![](https://latex.codecogs.com/gif.latex?L_%7B%5Ctheta%7D%20%3D%20%5Cmathds%7BE%7D%20%5Cbig%5B%28r_%7Bt%7D%20&plus;%20%5Cgamma%20V%28s_%7Bt&plus;1%7D%2C%20%5CPhi%29%20-%20Q%28s_%7Bt%7D%2C%20a_%7Bt%7D%2C%20%5Ctheta%29%29%5E%7B2%7D%5Cbig%5D)
 
+  * Install the requirements list in your favourite virtualenv with `pip install -r requirements.txt`
+
   * The directory `./models/` contains the weights of the Value and Quality networks which results are reported in the paper.
   If you aim to test one of these pre-trained networks you can run the `./models/DQV_Trained.py` script by being sure to use the weights that match the appropriate Open-Ai environment. 
   
