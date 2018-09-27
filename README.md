@@ -1,5 +1,5 @@
 # Deep Quality Value (DQV) Learning
-DQV-Learning: a novel faster synchronous Deep Reinforcement Learning algorithm.
+DQV-Learning: a novel faster and stable synchronous Deep Reinforcement Learning algorithm.
 
 ![](https://user-images.githubusercontent.com/14283557/46071343-165d7b80-c180-11e8-8b23-37cfecb96534.jpg)
 
@@ -25,6 +25,6 @@ To check the benefits of these update rules that are able to learn up to 3 times
 
   * Install the requirements list in your favourite virtualenv with `pip install -r requirements.txt`
 
-  * The directory `./models/` contains the weights of the Value and Quality networks which have obtained the results that are reported in the paper. If you aim to test one of these pre-trained networks you can run the `./models/DQV_Trained.py` script by being sure to use the weights that match the appropriate Open-Ai environment. 
+  * The directory `./models/` contains the weights of the Value and Quality networks which have obtained the results that are reported in the paper. If you aim to test one of these pre-trained networks you can run the `./models/DQV_Trained.py` script. Be sure to use the weights that match the appropriate Open-Ai environment. 
   
-  * If you aim to train a model from scratch, or adapt DQV on a different DRL problem, you can find the code for training the agents in `./train/`. The `.train_job.sh` script allows you to choose which Open-Ai environment you aim to train your agents on and which exploration strategy to follow. So far the code only supports e-greedy and Maxwell-Boltzman exploration. The script will call `DQV_learning.py` which is the code that has been used to train the networks present in `./models/` and that matches with what is reported in the paper.
+  * If you aim to train a model from scratch, or adapt DQV on a different DRL problem, you can find the code for training the agents in `./train/`. The `.train_job.sh` script allows you to choose which Open-Ai environment you want to train your agents on, and which exploration strategy to follow. So far the code only supports e-greedy and Maxwell-Boltzman exploration. The script will call `DQV_learning.py` which is the code that has been used to train the networks that are present in `./models/`, and that matches with what is reported in the paper. Training i.e. on the game Pong lasts ≈ 8 hours on a GTX 1080 GPU machine and the environment should be solved in ≈ 400 episodes.
