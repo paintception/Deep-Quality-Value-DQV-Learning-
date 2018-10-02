@@ -3,8 +3,7 @@ DQV-Learning: a novel faster and stable synchronous Deep Reinforcement Learning 
 
 ![](https://user-images.githubusercontent.com/14283557/46071343-165d7b80-c180-11e8-8b23-37cfecb96534.jpg)
 
-This repo contains the code and models of the paper Deep Quality-Value (DQV) Learning: 
-#### Paper on Arxiv soon!
+This repo contains the code and models of the paper Deep Quality-Value (DQV) Learning:(https://arxiv.org/abs/1810.00368)
 
 Given a standard RL setting, unlike Temporal-Difference (TD) Reinforcement Learning algorithms such as DQN and DDQN, DQV aims to learn directly a Value function with the TD(λ) update rule:
 
