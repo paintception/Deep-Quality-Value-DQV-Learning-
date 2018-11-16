@@ -1,0 +1,460 @@
+\documentclass[landscape,a0paper,fontscale=0.292]{baposter}
+
+\usepackage{times}
+\usepackage{calc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{algorithm}
+\usepackage{url} 
+
+\usepackage{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+\graphicspath{{images/}}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% Some math symbols used in the text
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Format 
+ \newcommand{\RotUP}[1]{\begin{sideways}#1\end{sideways}}
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Multicol Settings
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \setlength{\columnsep}{0.7em}
+ \setlength{\columnseprule}{0mm}
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Save space in lists. Use this after the opening of the list
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \newcommand{\compresslist}{%
+ \setlength{\itemsep}{1pt}%
+ \setlength{\parskip}{0pt}%
+ \setlength{\parsep}{0pt}%
+ }
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Formating
+ \newcommand{\Matrix}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+ \newcommand{\Vector}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+
+ \newcommand*{\norm}[1]{\mathopen\| #1 \mathclose\|}% use instead of $\|x\|$
+ \newcommand*{\abs}[1]{\mathopen| #1 \mathclose|}% use instead of $\|x\|$
+ \newcommand*{\normLR}[1]{\left\| #1 \right\|}% use instead of $\|x\|$
+
+ \newcommand*{\SET}[1]  {\ensuremath{\mathcal{#1}}}
+ \newcommand*{\FUN}[1]  {\ensuremath{\mathcal{#1}}}
+ \newcommand*{\MAT}[1]  {\ensuremath{\boldsymbol{#1}}}
+ \newcommand*{\VEC}[1]  {\ensuremath{\boldsymbol{#1}}}
+ \newcommand*{\CONST}[1]{\ensuremath{\mathit{#1}}}
+
+ \DeclareMathOperator*{\argmax}{arg\,max}
+ \DeclareMathOperator*{\diag}{diag}
+ \DeclareMathOperator*{\argmin}{arg\,min}
+ \DeclareMathOperator*{\vectorize}{vec}
+ \DeclareMathOperator*{\reshape}{reshape}
+
+ %-----------------------------------------------------------------------------
+ % Differentiation
+ \newcommand*{\Nabla}[1]{\nabla_{\!#1}}
+
+ \renewcommand*{\d}{\mathrm{d}}
+ \newcommand*{\dd}{\partial}
+
+ \newcommand*{\At}[2]{\ensuremath{\left.#1\right|_{#2}}}
+ \newcommand*{\AtZero}[1]{\At{#1}{\pp=\VEC 0}}
+
+ \newcommand*{\diffp}[2]{\ensuremath{\frac{\dd #1}{\dd #2}}}
+ \newcommand*{\diffpp}[3]{\ensuremath{\frac{\dd^2 #1}{\dd #2 \dd #3}}}
+ \newcommand*{\diffppp}[4]{\ensuremath{\frac{\dd^3 #1}{\dd #2 \dd #3 \dd #4}}}
+ \newcommand*{\difff}[2]{\ensuremath{\frac{\d #1}{\d #2}}}
+ \newcommand*{\diffff}[3]{\ensuremath{\frac{\d^2 #1}{\d #2 \d #3}}}
+ \newcommand*{\difffp}[3]{\ensuremath{\frac{\dd\d #1}{\d #2 \dd #3}}}
+ \newcommand*{\difffpp}[4]{\ensuremath{\frac{\dd^2\d #1}{\d #2 \dd #3 \dd #4}}}
+
+ \newcommand*{\diffpAtZero}[2]{\ensuremath{\AtZero{\diffp{#1}{#2}}}}
+ \newcommand*{\diffppAtZero}[3]{\ensuremath{\AtZero{\diffpp{#1}{#2}{#3}}}}
+ \newcommand*{\difffAt}[3]{\ensuremath{\At{\difff{#1}{#2}}{#3}}}
+ \newcommand*{\difffAtZero}[2]{\ensuremath{\AtZero{\difff{#1}{#2}}}}
+ \newcommand*{\difffpAtZero}[3]{\ensuremath{\AtZero{\difffp{#1}{#2}{#3}}}}
+ \newcommand*{\difffppAtZero}[4]{\ensuremath{\AtZero{\difffpp{#1}{#2}{#3}{#4}}}}
+
+ %-----------------------------------------------------------------------------
+ % Defined
+ % How should the defined operator look like (:= or ^= ==)
+ % (I want back my :=, it is so much better than ^= because (1) it has a
+ % direction and (2) everyone here uses it.)
+ %
+ % Use :=
+ %\newcommand*{\defined}{\ensuremath{\mathrel{\mathop{:}}=}}
+ %\newcommand*{\definedRight}{\ensuremath{=\mathrel{\mathop{:}}}}
+ % Use ^=
+ \newcommand*{\defined}{\ensuremath{\triangleq}}
+ \newcommand*{\definedRight}{\ensuremath{\triangleq}}
+ % Use = with three bars
+ %\newcommand*{\defined}{\ensuremath{?}}
+ %\newcommand*{\definedRight}{\ensuremath{?}}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Symbols used in the paper
+
+ %-----------------------------------------------------------------------------
+ % The Methods
+ \newcommand*{\ICIA}{\emph{ICIA}}
+ \newcommand*{\CoDe}{\emph{CoDe}}
+ \newcommand*{\LinCoDe}{\emph{LinCoDe}}
+ \newcommand*{\CoNe}{\emph{CoNe}}
+ \newcommand*{\CoLiNe}{\emph{CoLiNe}}
+ \newcommand*{\LinCoLiNe}{\emph{LinCoLiNe}}
+
+ % inter eye distance
+ \newcommand*{\ied}{IED}
+
+ %-----------------------------------------------------------------------------
+ % Koerper
+ %%\newcommand*{\RR}{\mathbb{R}}
+ %\newcommand*{\RR}{{I\hspace{-3.5pt}R}}
+ %\newcommand*{\RR}{{\mathrm{I\hspace{-2.7pt}R}}}
+
+ \font\dsfnt=dsrom12
+
+ \DeclareSymbolFont{nark}{U}{dsrom}{m}{n}
+ \DeclareMathSymbol{\NN}{\dsfnt}{nark}{`N}
+ \DeclareMathSymbol{\RR}{\dsfnt}{nark}{`R}
+ \DeclareMathSymbol{\ZZ}{\dsfnt}{nark}{`Z}
+
+ %-----------------------------------------------------------------------------
+ % Domains
+ \newcommand*{\D}{\mathcal{D}}
+ \newcommand*{\I}{\mathcal{I}}
+
+ %-----------------------------------------------------------------------------
+ % Texture coordinates
+ \newcommand*{\rr}{\VEC{r}}
+
+ %-----------------------------------------------------------------------------
+ % Parameters
+ \newcommand*{\pt}{\VEC{\tau}}
+ \newcommand*{\pr}{\VEC{\rho}}
+ \newcommand*{\pp}{\VEC{p}}
+ \newcommand*{\qq}{\VEC{q}}
+ \newcommand*{\xx}{\VEC{x}}
+ \newcommand*{\deltaq}{\Delta \qq}
+ \newcommand*{\deltap}{\Delta \pp}
+ \newcommand*{\zz}{\VEC{z}}
+ \newcommand*{\pa}{\VEC{\alpha}}
+ \newcommand*{\qa}{\VEC{\alpha}}
+ \newcommand*{\pb}{\VEC{\beta}}
+
+ %-----------------------------------------------------------------------------
+ % Optimal appearance parameters
+ \newcommand*{\pbh}[1]{\ensuremath{\hat{\pb}({#1})}}
+
+ %-----------------------------------------------------------------------------
+ % Warp basis
+ \newcommand*{\M}[1]{\ensuremath{M({#1})}}
+ \newcommand*{\LL}[1]{\ensuremath{L({#1})}}
+
+ %-----------------------------------------------------------------------------
+ % Matrices of the texture model
+ \newcommand*{\AM}[1]{\ensuremath{\Lambda(#1)}}               % Lambda(beta) 
+ \newcommand*{\AMr}[2]{\ensuremath{\Lambda(#1; #2)}}        % Lambda(r, beta)
+
+ \newcommand*{\As}{A}         % Continuous Basis symbol
+ \newcommand*{\afs}{a}        % Continuous mean symbol
+ \newcommand*{\A}[1]{\As(#1)}         % Continuous Basis
+ \newcommand*{\af}[1]{\afs(#1)}        % Continuous mean
+
+
+ %-----------------------------------------------------------------------------
+ % Matrices of the shape model
+ \newcommand*{\MU}{\VEC{\mu}}
+ \newcommand*{\MM}{\MAT{M}}
+
+ %-----------------------------------------------------------------------------
+ %% The project out matrix and operator
+ \newcommand*{\INT}{\MAT{P}}
+ \newcommand*{\INTf}{P}
+
+ %-----------------------------------------------------------------------------
+ % The identity matrix
+ \newcommand*{\EYEtwo}{\Matrix{1 & 0\\0&1}}
+ \newcommand*{\EYE}{\MAT E}
+ \newcommand*{\EYEf}{E}
+
+ % Wether to use subscripts or brackets for some function arguments
+ % can be decided by commenting out the corresponding functions underneath
+ %-----------------------------------------------------------------------------
+ % Mapping
+ \newcommand*{\Cs}[1]{\ensuremath{C^{#1}}} % C symbol
+ \newcommand*{\C}[2]{\ensuremath{C^{#1}(#2)}} % Use C with brackets
+
+ %-----------------------------------------------------------------------------
+ % Objective function
+ \newcommand*{\Fs}{\ensuremath{F}}              % F symbol
+ \newcommand*{\F}[1]{\ensuremath{\Fs(#1)}}       % Use F with brackets    F(q)
+
+ %-----------------------------------------------------------------------------
+ % Approximated objective functions
+ \newcommand*{\FFs}{\tilde{F}}                     % ~F symbol
+ \newcommand*{\FF}[1]{\ensuremath{\FFs(#1)}}       % Use ~F with brackets    F(q)
+
+ %-----------------------------------------------------------------------------
+ % residual function
+ \newcommand*{\es}{\ensuremath{f}}              % R symbol
+
+ \newcommand*{\e}[1]{\ensuremath{\es(#1)}}         % R(q)
+ \newcommand*{\er}[2]{\ensuremath{\es(#1; #2)}}    % R(r; q)
+
+ %-----------------------------------------------------------------------------
+ % Approximated residual functions
+ \newcommand*{\ees}{\tilde{f}}                       % ~R symbol
+ \newcommand*{\ee}[1]{\ensuremath{\ees(#1)}}       % ~R(q)
+ \newcommand*{\eer}[2]{\ensuremath{\ees(#2; #1)}}  % ~R(r; q)
+
+ %-----------------------------------------------------------------------------
+ % Warps
+ \newcommand*{\Vs}{\ensuremath{V}}
+ \newcommand*{\VLins}{\ensuremath{\Vs^{\text{Ortho}}}}
+ \newcommand{\VModels}{\ensuremath{\Vs^{\text{Model}}}}
+ \newcommand*{\Ws}{\ensuremath{W}}
+
+ \newcommand{\V}[1]{\ensuremath{\Vs(#1)}}
+ \newcommand{\VModel}[1]{\ensuremath{\VModels(#1)}}
+ \newcommand{\Vr}[2]{\ensuremath{\Vs(#1; #2)}}
+ \newcommand{\VInvr}[2]{\ensuremath{\Vs^{-1}(#1; #2)}}
+ \newcommand{\VrLin}[2]{\ensuremath{\VLins(#1; #2)}}
+ \newcommand{\W}[1]{\ensuremath{\Ws(#1)}}
+ \newcommand{\Winv}[1]{\ensuremath{\Ws^{-1}(#1)}}
+ \newcommand{\Wr}[2]{\ensuremath{\Ws(#1; #2)}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\definecolor{cosmiclatte}{rgb}{1.0, 0.97, 0.91}
+\definecolor{airforceblue}{rgb}{0.63, 0.79, 0.95}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here starts the poster
+%%---------------------------------------------------------------------------
+%% Format it to your taste with the options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{poster}{
+ % Show grid to help with alignment
+ grid=false,
+ % Column spacing
+ colspacing=0.9em,
+ % Color style
+ headerColorOne=airforceblue,
+ borderColor=airforceblue,
+ % Format of textbox
+ textborder=bars,
+ % Format of text header
+ headerborder=open,
+ headershape=roundedright,
+ headershade=plain,
+ %background=pink,
+ bgColorOne=cosmiclatte,
+ headerheight=0.12\textheight}
+ % Eye Catcher
+ {
+      \includegraphics[width=0.2\linewidth]{liegelogo}
+ }
+ % Title
+ {\sc\Huge Deep Quality-Value (DQV) Learning}
+ % Authors
+ {Matthia Sabatelli, Gilles Louppe, Pierre Geurts, Marco A. Wiering \\[1em]
+ {\texttt{m.sabatelli@uliege.be, g.louppe@uliege.be, p.geurts@uliege.be, m.a.wiering@rug.nl}}}
+ % University logo
+ {
+  \begin{tabular}{r}
+    \includegraphics[height=0.12\textheight]{ruglogo}
+  \end{tabular}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be inbetween, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Contributions}{name=contribution,column=0,row=0,span=2}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We introduce Deep Quality-Value (DQV) Learning, a novel Deep Reinforcement Learning (DRL) algorithm which learns significantly
+faster and better than Deep Q-Learning and Double Deep Q-Learning. DQV uses temporal-difference learning to train
+a Value neural network and uses this network for training a second Quality-value network that learns to estimate state-action values.	
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Preliminaries and Motivation}{name=abstract,column=0,below=contribution}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We consider a set of possible states, $\cal S$, and a set of possible actions $\cal A$ that allow an agent to perform a state transition from state $s_t$ at time $t$ to $s_{t+1}$ defined by a transition probability distribution $p(s_{t+1} | s_{t}, a_{t})$. Associated to it there is an immediate reward function, $\Re (s_{t}, a_{t}, s_{t+1})$. Actions are taken based on a policy $\pi:s \rightarrow a$. For each state we can calculate its Value $V$ with respect to a discount factor $\gamma$:
+\begin{align*}
+\centering
+V^{\pi}(s) = \mathds{E} \left[\sum_{k=0}^{\infty} \gamma^{k} r_{t+k} \middle| s_t = s \right],
+\label{eq: value_function}
+\end{align*}
+
+whereas values of state-action pairs, $Q^{\pi}(s,a)$ can be maximized with a policy that satisfies
+
+\begin{align*}
+Q^{\pi}(s_{t}, a_{t}) = \sum_{s_{t+1}\in \cal S} p(s_{t+1} | s_{t}, a_{t}) 
+						\bigg(\Re(s_{t}, a_{t}, s_{t+1}) \\
+ 					+ \gamma \max_{a_{t+1} \in \cal A} Q^{\pi}
+                        (s_{t+1}, a_{t+1})\bigg).
+\end{align*}
+
+
+\textbf{Quality-Value QV($\lambda$) Learning} is an online tabular RL algorithm proposed in \cite{dqv} which keeps
+track of both the $Q$ function and the $V$ function. First $V$ is learned through temporal difference TD($\lambda$) learning and the following update rule:
+\begin{align*}
+V(s):= V(s) + \alpha \big[ r_{t} + \gamma V(s_{t+1}) - V(s_t) \big] e_{t}(s).
+\label{eq: V_update}
+\end{align*}
+
+Then these estimates are used to learn the $Q$ function with an update rule which is similar to one step Q-Learning.
+\begin{align*}
+Q(s_{t}, a_{t}):= Q(s_{t}, a_{t}) + \alpha \big[r_{t} + \gamma V(s_{t+1}) - Q(s_{t}, a_{t}) \big].
+\label{eq: Q_update}
+\end{align*}
+
+\textbf{Goal:} We aim to formulate these update rules as objective functions which can be minimized via gradient descent.
+
+}
+
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \headerbox{Experimental Setup}{name=speed,column=2,row=0,span=2}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   We use Multilayer Perceptrons for approximating the $V$ and the $Q$ function on two classic RL problems, and Deep Convolutional Neural Networks on four Atari games. 
+   The environments that have been used are from left to right: \textit{Acrobot, Cartpole, Pong, Enduro, Boxing and Ice-Hockey.}
+	 \centering	
+	  \includegraphics[width=.8\linewidth]{./results/experimental_setup.png}
+	
+   }
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   \headerbox{Methods Compared}{name=methods,column=0,below=algorithm}{
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   \begin{tabular}{rllllll}
+%     Method                              & Hessian               &                                        & Gradient        &                                  & Speed      & Capture Range\\
+%     \midrule
+% \CoDe{} (this paper)                & Not used              &                                        & True:           & $\tilde{J}_{\qq_0}^T\e{\qq_0}$   & Fast       & Large  \\[0.1em]
+% \LinCoDe{} (this paper)             & Not used              &                                        & Linear Approx:  & $\bar{J}^T\e{\qq_0}$             & Very Fast  & Medium \\[0.1em]
+% \CoLiNe{}~\cite{burkhardt86:motion} & Constant Approx.:     & $\bar{J}^T\bar{J}$                     & True:           & $\tilde{J}_{\qq_0}^T\e{\qq_0}$   & Fast       & Medium \\[0.1em]
+% \ICIA{}~\cite{matthews:aamr}        & Constant Approx.:     & $\bar{J}^T\bar{J}$                     & Linear Approx:  & $\bar{J}^T\e{\qq_0}$             & Very Fast  & Small  \\[0.1em]
+% \CoNe{}~\cite{matthews:kanade20}    & Gauss-Newton Approx.: & $\tilde{J}_{\qq_0}^T\tilde{J}_{\qq_0}$ & True:           & $\tilde{J}_{\qq_0}^T\e{\qq_0}$   & Slow       & Large  
+%   \end{tabular}
+%   The methods introduced in this paper are Hessian-free gradient descent methods.
+%  }
+%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \headerbox{Acknowledgements}{name=references,column=2,above=bottom}{
+	Matthia Sabatelli acknowledges the financial support of the Federal Public Planning Service Science Policy, Belgium, within the BRAIN-be project.
+}
+   \headerbox{References}{name=references,column=3,above=bottom}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     \smaller
+     
+     \bibliographystyle{ieee}
+     \renewcommand{\section}[2]{\vskip 0.05em}
+       \begin{thebibliography}{1}\itemsep=-0.01em
+       \setlength{\baselineskip}{0.4em}
+
+       \bibitem{dqv}
+       Marco A. Wiering
+       \newblock QV($\lambda$)-learning: A new on-policy reinforcement learning algorithm.
+	\bibitem{dqn}
+	Mnih et al.
+	\newblock Human-level control through deep reinforcement learning.
+
+	\bibitem{ddqn}
+	Van Hasselt et al.
+	\newblock Deep Reinforcement Learning with Double Q-Learning.
+
+       \end{thebibliography}
+   }
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \headerbox{Results and Discussion}{name=tracking,column=2,span=2,below=speed,above=bottom}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \centering
+  \includegraphics[width=0.3\linewidth]{./results/Acrobot.png}\includegraphics[width=0.3\linewidth]{./results/CartPole.png}\includegraphics[width=0.3\linewidth]{./results/Pong.png}
+  \includegraphics[width=0.3\linewidth]{./results/Enduro.png}\includegraphics[width=0.3\linewidth]{./results/Boxing.png}\includegraphics[width=0.3\linewidth]{./results/Ice-Hockey.png}
+
+When used in combination with a Multilayer Perceptron on two classic RL problems (Acrobot and Cartpole) DQV learns significantly faster when compared with DQN \cite{dqn} and DDQN \cite{ddqn}.
+Similarly, when used in combination with Deep Convolutional Neural Networks, Experience Replay and Target Neural Networks on four Atari games, DQV learns faster on the games \textit{Pong} and \textit{Boxing} while it also yields better results on the games \textit{Enduro} and \textit{Ice-Hockey}.
+
+ }
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{DQV-Learning}{name=algorithm,column=1,above=lowrestracking,below=contribution}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+	
+We use two neural networks parametrized as $\Phi$ and $\theta$ respectively, and formulate QV($\lambda$)'s update rules in Mean Squared Error terms. We can now minimize the $V$ function with:
+\begin{align*}
+L_{\Phi} = \mathds{E} \big[\underbrace{(r_{t} + \gamma V(s_{t+1}, \Phi)}_{y_t} - V(s_{t}, \Phi))^{2}\big]
+\end{align*}
+
+and the $Q$ function with:
+\begin{align*}
+L_{\theta} = \mathds{E} \big[\underbrace{(r_{t} + \gamma V(s_{t+1}, \Phi)}_{y_t} - Q(s_{t}, a_{t}, \theta))^{2}\big].
+\label{eq: q_update_ann}
+\end{align*}
+
+Note that both neural networks use the same target $y_t$ when learning. We additionally improve the stability of DQV with:
+\begin{itemize}
+	\item \textbf{Experience Replay}: a memory buffer, $D$, of size $N$, which
+    stores experiences as $\langle$ $s_{t}$, $a_{t}$, $r_{t}$, $s_{t+1}$
+    $\rangle$ that we can uniformily sample from $\langle$ $s_{t}$, $a_{t}$, $r_{t}$, $s_{t+1}$ $\rangle \sim U(D)$ for optimizing the neural networks. 
+
+	\item \textbf{Target Neural Network:} a separate neural network, parametrized as $\Phi^{-}$ that is specifically designed for estimating the targets, $y_{t}$, that are necessary for computing the TD 		errors. This slightly modifies the original loss functions to:
+	\begin{align*}
+		L_{\Phi} = \mathds{E} \big[(r_{t} + \gamma V(s_{t+1}, \Phi^{-}) - V(s_{t}, \Phi))^{2}\big]
+	\end{align*}
+	and 
+	\begin{align*}
+		L_{\theta} = \mathds{E} \big[(r_{t} + \gamma V(s_{t+1}, \Phi^{-}) - Q(s_{t}, a_{t}, \theta))^{2}\big].
+	\end{align*}
+
+\end{itemize}	 
+
+We update the Value-Target-Network $\Phi^{-}$ with the weights of our original Value Network $\Phi$ every 10,000 actions as defined by the hyperparameter $c$.
+
+}
+
+\end{poster}%
+%
+\end{document}
