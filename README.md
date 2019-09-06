@@ -1,6 +1,11 @@
 # Deep Quality Value (DQV) Learning
 DQV-Learning: a novel faster and stable synchronous Deep Reinforcement Learning algorithm.
 
+**A NEW PAPER WHICH MASSIVELY EXTENDS THE DQV-LEARNING ALGORITHM IS OUT! WE HAVE REFACTORED ALL THIS CODE WITHIN OUR NEW LIBRARY, BE SURE TO CHECK IT OUT!** 
+
+* NEW PAPER: https://arxiv.org/abs/1909.01779
+* UPDATED CODE: https://github.com/paintception/Deep-Quality-Value-Family-
+
 ![](https://user-images.githubusercontent.com/14283557/46071343-165d7b80-c180-11e8-8b23-37cfecb96534.jpg)
 
 This repo contains the official code and models of the paper Deep Quality-Value (DQV) Learning which has been presented at the **NeurIPS Deep Reinforcement Learning Workshop, Montreal (CA), 2018**: https://arxiv.org/abs/1810.00368
