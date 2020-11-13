@@ -79,7 +79,7 @@ statistics==1.0.3.5
 statsmodels==0.8.0
 subprocess32==3.2.7
 tblib==1.3.2
-tensorflow==1.15.0
+tensorflow==2.3.1
 tensorflow-tensorboard==1.5.1
 Theano==1.0.1
 toolz==0.9.0
