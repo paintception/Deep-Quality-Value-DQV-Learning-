@@ -30,7 +30,7 @@ idna==2.6
 imageio==2.2.0
 ipython==5.4.1
 ipython-genutils==0.2.0
-Jinja2==2.10
+Jinja2==2.11.3
 Keras==2.0.9
 kiwisolver==1.0.1
 locket==0.2.0
