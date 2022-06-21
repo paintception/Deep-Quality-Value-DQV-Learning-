@@ -41,7 +41,7 @@ matplotlib==2.2.0
 mock==2.0.0
 msgpack-python==0.5.1
 networkx==2.1
-numpy==1.14.1
+numpy==1.22.0
 olefile==0.45.1
 packaging==16.8
 pandas==0.22.0
