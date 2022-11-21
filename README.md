@@ -13,7 +13,7 @@ Given a standard RL setting, unlike Temporal-Difference (TD) Reinforcement Learn
 which estimates can then be used to learn the state-action pairs of the Q-function via:
 ![](https://latex.codecogs.com/gif.latex?Q%28s_%7Bt%7D%2C%20a_%7Bt%7D%29%3A%3D%20Q%28s_%7Bt%7D%2C%20a_%7Bt%7D%29%20&plus;%20%5Calpha%20%5Cbig%5Br_%7Bt%7D%20&plus;%20%5Cgamma%20V%28s_%7Bt&plus;1%7D%29%20-%20Q%28s_%7Bt%7D%2C%20a_%7Bt%7D%29%20%5Cbig%5D)
 
-When approximating the two update rules with a non parametric function approximator like a neural network, both functions can be expressed as regression problems that can be minimized through gradient descent by optimizing
+When approximating the two update rules with a parametric function approximator like a neural network, both functions can be expressed as regression problems that can be minimized through gradient descent by optimizing
 
 ![](https://latex.codecogs.com/gif.latex?L_%7B%5CPhi%7D%20%3D%20%5Cmathds%7BE%7D%20%5Cbig%5B%28r_%7Bt%7D%20&plus;%20%5Cgamma%20V%28s_%7Bt&plus;1%7D%2C%20%5CPhi%29%20-%20V%28s_%7Bt%7D%2C%20%5CPhi%29%29%5E%7B2%7D%5Cbig%5D%2C)
 
