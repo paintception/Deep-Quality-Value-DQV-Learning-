@@ -34,7 +34,7 @@ Jinja2==2.10
 Keras==2.0.9
 kiwisolver==1.0.1
 locket==0.2.0
-Mako==1.0.7
+Mako==1.2.2
 Markdown==2.6.9
 MarkupSafe==1.0
 matplotlib==2.2.0
